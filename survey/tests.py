@@ -60,6 +60,25 @@ class QuestionMethodsTest(TestCase):
 		old_question1 = Question('Who will win the 2016 Presidential election?', pub_date = now)
 		self.assertFalse(old_question1.posted_shortly())
 
+	def test_posted_shortly_with_recent_question(self):
+		now = timezone.now() - datetime.timedelta(hours=4)
+		recent_question = Question('Who will win the 2016 SuperBowl championship?', pub_date = now)
+		self.assertTrue(recent_question.posted_shortly())
+
+
+def create_question(question_text, num_of_days):
+	time = timezone.now() + datetime.timedelta(days = num_of_days)
+	return Question.objects.create(question = question_text, pub_date = time)
+
+# Functional Tests
+class QuestionViewsTest(TestCase):
+
+	def test_index_view_with_no_questions(self):
+		response = self.client.get(reverse('survey:index'))
+		self.assertEqual(response.status_code, 200)
+		self.assertContains(response, "No Survey questions are available as of now.")
+		self.assertQuerysetEqual(response.context['latest_question_list'], [])
+	
 
 
 
