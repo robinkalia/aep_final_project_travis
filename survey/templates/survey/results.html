@@ -1,0 +1,17 @@
+<!--
+	Robin Kalia
+	UC Berekeley
+	robinkalia@berkeley.edu
+
+	results.html: The template for displaying the results corresponding to a specific question (url: /survey/<question_id>)
+-->
+
+<h1>{{question.id}}) {{ question.question }}:</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+	<li><h2>{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}</h2></li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'survey:detail' question.id %}">Vote Again?</a>

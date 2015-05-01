@@ -1,0 +1,32 @@
+# Robin Kalia
+# robinkalia@berkeley.edu
+# UC Berkeley
+#
+# Course: Info 290T - AEP: Agile Engineering Practices
+
+language: python
+
+python:
+  - "2.7"
+
+env:
+  - DJANGO=Django==1.7
+
+# command to install dependencies
+install:
+    - pip install -q $DJANGO --use-mirrors
+    - pip install -q -r requirements.txt --use-mirrors
+
+# command to run tests
+script: python setup.py test 
+
+# Notifications
+notifications:
+    email:
+        recipients:
+            - robinkalia@berkeley.edu
+        on_success: always
+        on_failure: never
+
+
+

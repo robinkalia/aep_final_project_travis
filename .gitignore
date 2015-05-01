@@ -1,0 +1,8 @@
+*.log
+*.pot
+*.pyc
+dist
+*.egg*
+coverage.xml
+pep8.txt
+*.swp

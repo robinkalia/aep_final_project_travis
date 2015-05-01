@@ -1,0 +1,18 @@
+/* 
+	Robin Kalia
+	robinkalia@kalelvision.com
+	KalElVision L.L.C.
+	
+	style.css: A CSS file for designing the displayed HTML
+*/
+
+
+li a {
+	color: red;
+}
+
+
+body {
+	background: white url("images/background.gif") no-repeat center;
+}
+ 

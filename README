@@ -1,0 +1,9 @@
+# Robin Kalia
+# robinkalia@berkeley.edu
+# UC Berkeley
+#
+# Info 290T: Agile Engineering Practices - Final Project on Travis
+
+This is a simple Django App for creating Surveys. 'aep' is the main project and 'survey' is the web app. 
+
+Unit and Functional Tests for the 'survey' web app will be added in iterations leading upto 10 builds on Travis.

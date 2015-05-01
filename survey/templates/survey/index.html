@@ -1,0 +1,24 @@
+<!--
+	Robin Kalia
+	UC Berekeley
+	robinkalia@berkeley.edu
+
+	index.html: The initial template that will be loaded for the site/survey/ webpage
+-->
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'survey/style.css' %}" />
+
+<p><h2>This is a simple Web App for Survey.</h2>Some of the latest Survey questions are mentioned below:</p>
+
+{% if latest_question_list %}
+	<ul>
+	{% for q in latest_question_list %}
+		<li><a href="{% url 'survey:detail' q.id %}">{{ q.question }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No Survey questions are available as of now.</p>
+{% endif %}
+
