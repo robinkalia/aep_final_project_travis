@@ -50,6 +50,17 @@ class QuestionMethodsTest(TestCase):
 		question = Question(question = "{:201}".format(text_str))
 		self.assertTrue(question.contains_verylong_text())
 
+	def test_posted_shortly_with_future_question(self):
+		now = timezone.now() + datetime.timedelta(days=22)
+		future_question = Question(pub_date = now)
+		self.assertFalse(future_question.posted_shortly())
+
+	def test_posted_shortly_with_old_question(self):
+		now = timezone.now() - datetime.timedelta(days=22)
+		old_question1 = Question('Who will win the 2016 Presidential election?', pub_date = now)
+		self.assertFalse(old_question1.posted_shortly())
+
+
 
 
 
