@@ -78,7 +78,19 @@ class QuestionViewsTest(TestCase):
 		self.assertEqual(response.status_code, 200)
 		self.assertContains(response, "No Survey questions are available as of now.")
 		self.assertQuerysetEqual(response.context['latest_question_list'], [])
-	
+		
+	def test_index_view_with_an_old_question(self):
+		create_question(question_text='Who will win the 2016 SuperBowl championship?', num_of_days = -22)
+		response = self.client.get(reverse('survey:index'))
+		self.assertQuerysetEqual(response.context['latest_question_list'], ['<Question: Who will win the 2016 SuperBowl championship?>'])
+
+	def test_index_view_with_a_future_question(self):
+		create_question(question_text='Who will win WWE SummerSlam 2016?', num_of_days=22)
+		response = self.client.get(reverse('survey:index'))
+		self.assertContains(response, "No Survey questions are available as of now.", status_code=200)
+		self.assertQuerysetEqual(response.context['latest_question_list'], [])
+
+
 
 
 
