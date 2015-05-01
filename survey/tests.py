@@ -90,6 +90,13 @@ class QuestionViewsTest(TestCase):
 		self.assertContains(response, "No Survey questions are available as of now.", status_code=200)
 		self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
+	def test_index_view_with_old_and_future_questions(self):
+		create_question(question_text="Who is the greatest WWE SuperStar of all time?", num_of_days=-22)
+		create_question(question_text="Who is the greatest WWE Championship holder of the past 3 decades?", num_of_days=22)
+		response = self.client.get(reverse('survey:index'))
+		self.assertQuerysetEqual(response.context['latest_question_list'], ['<Question: Who is the greatest WWE SuperStar of all time?>'])
+
+
 
 
 
