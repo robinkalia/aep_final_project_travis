@@ -102,6 +102,11 @@ class QuestionViewsTest(TestCase):
 		response = self.client.get(reverse('survey:index'))
 		self.assertQuerysetEqual(response.context['latest_question_list'], ['<Question: Who is the greatest WWE Championship holder of the past 3 decades?>', '<Question: Who is the greatest WWE SuperStar of all time?>'])
 
+    	def test_index_view_with_two_future_questions(self):
+        	create_question(question_text="Which of the following creatures is the most dangerous?", num_of_days=13)
+        	create_question(question_text="Which of the following cities experiences the coldest winter?", num_of_days=20)
+        	response = self.client.get(reverse('survey:index'))
+        	self.assertQuerysetEqual(response.context['latest_question_list'], [])
 
 
 
