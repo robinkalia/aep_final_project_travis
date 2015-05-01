@@ -40,6 +40,16 @@ class QuestionMethodsTest(TestCase):
 	def test_contains_nonempty_text_with_valid_text(self):
 		question = Question(question = 'Who will win the 2016 Presidential election?')
 		self.assertTrue(question.contains_nonempty_text())
+  
+	def test_contains_verylong_text_with_normal_size_text(self):
+		question = Question(question = 'Who will win the 2016 SuperBowl championship?')
+		self.assertFalse(question.contains_verylong_text())
  
+	def test_contains_verylong_text_with_big_size_text(self):
+		text_str = "Who will win the 2016 SuperBowl championship?"
+		question = Question(question = "{:201}".format(text_str))
+		self.assertTrue(question.contains_verylong_text())
+
+
 
 
